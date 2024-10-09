@@ -7,6 +7,7 @@ export interface ICharacterExtended extends IRandomCharacter {
 }
 
 export interface IRandomCharacter extends ICharacter {
+  description: string
   urls: {
     type: string
     url: string
@@ -16,8 +17,10 @@ export interface IRandomCharacter extends ICharacter {
 export interface ICharacter {
   id: number | null
   name: string
-  thumbnail: {
-    path: string
-    extension: string
-  }
+  thumbnail: IThumbnail | null
+}
+
+export interface IThumbnail {
+  path: string
+  extension: string
 }

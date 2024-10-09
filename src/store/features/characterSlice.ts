@@ -16,10 +16,8 @@ interface IState extends ICharacterExtended {
 const initialState: IState = {
   id: null,
   name: '',
-  thumbnail: {
-    path: '',
-    extension: '',
-  },
+  thumbnail: null,
+  description: '',
   urls: [],
   comics: {
     items: [],
@@ -65,8 +63,6 @@ export const loadCharacter = createAsyncThunk<ICharacterExtended[], number>(
     const {
       data: { results },
     } = await api.get<{ results: ICharacterExtended[] }>(`characters/${id}`)
-
-    console.log(results)
 
     return results
   },

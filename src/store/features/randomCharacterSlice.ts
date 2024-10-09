@@ -17,10 +17,8 @@ interface IState extends IRandomCharacter {
 const initialState: IState = {
   id: null,
   name: '',
-  thumbnail: {
-    path: '',
-    extension: '',
-  },
+  thumbnail: null,
+  description: '',
   urls: [],
   loading: false,
   error: false,
@@ -64,8 +62,6 @@ export const loadRandomCharacter = createAsyncThunk<IRandomCharacter[], void, { 
     const {
       data: { results },
     } = await api.get<{ results: IRandomCharacter[] }>(`characters/${randomId}`)
-
-    console.log(results)
 
     return results
   },
