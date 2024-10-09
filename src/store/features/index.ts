@@ -1,0 +1,6 @@
+export { default as randomCharacterSlice } from './randomCharacterSlice'
+export * from './randomCharacterSlice'
+export { default as charactersSlice } from './charactersSlice'
+export * from './charactersSlice'
+export { default as characterSlice } from './characterSlice'
+export * from './characterSlice'
