@@ -17,7 +17,6 @@ import {
 } from './styles'
 
 import errorImg from '@/images/error.gif'
-import notAvailable from '@/images/image-not-available.png'
 import mjolnirImg from '@/images/mjolnir.png'
 import { Button, Loader } from '~/components/shared'
 import { ButtonStyle } from '~/constants'
@@ -46,8 +45,9 @@ const RandomChar: React.FC = () => {
         {!loading && !error && (
           <Block>
             <BlockThumbnail
-              src={thumbnail ? concatThumbnailUrl(thumbnail) : notAvailable}
+              src={concatThumbnailUrl(thumbnail)}
               alt={name}
+              $thumbnail={!concatThumbnailUrl(thumbnail).includes('image_not_available')}
             />
             <BlockInfo>
               <BlockName>{name}</BlockName>

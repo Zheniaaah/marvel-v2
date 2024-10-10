@@ -17,7 +17,10 @@ interface IState extends IRandomCharacter {
 const initialState: IState = {
   id: null,
   name: '',
-  thumbnail: null,
+  thumbnail: {
+    path: '',
+    extension: '',
+  },
   description: '',
   urls: [],
   loading: false,

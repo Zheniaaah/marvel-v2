@@ -17,7 +17,7 @@ export interface IRandomCharacter extends ICharacter {
 export interface ICharacter {
   id: number | null
   name: string
-  thumbnail: IThumbnail | null
+  thumbnail: IThumbnail
 }
 
 export interface IThumbnail {

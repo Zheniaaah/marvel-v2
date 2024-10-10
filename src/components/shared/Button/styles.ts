@@ -1,78 +1,35 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 import { ButtonStyle, Color } from '~/constants'
 
-interface IColorProps {
+interface IButtonContainerProps {
   $color: ButtonStyle
-}
-
-interface IButtonContainerProps extends IColorProps {
   $width?: number
 }
 
-const innerPseudoElem = css<IColorProps>`
-  content: '';
-  position: absolute;
-  display: block;
-  border-width: 0 0 10px 10px;
-  border-style: solid;
-  border-color: ${({ $color }) => ($color === ButtonStyle.Red ? Color.CrimsonRed : Color.DarkGray)}
-    #0000;
-  transition: none;
-`
-
-const buttonContainerPseudoElem = css<IColorProps>`
-  content: '';
-  display: block;
-  height: 10px;
-  transition: none;
-  background-color: ${({ $color }) =>
-    $color === ButtonStyle.Red ? Color.CrimsonRed : Color.DarkGray};
-`
-
-export const Inner = styled.div<IColorProps>`
-  position: relative;
-  background-color: ${({ $color }) =>
-    $color === ButtonStyle.Red ? Color.CrimsonRed : Color.DarkGray};
-  line-height: 18px;
-  transition: none;
-  padding: 0 18px;
-
-  &::before {
-    ${innerPseudoElem};
-    top: -10px;
-    left: 0;
-  }
-
-  &::after {
-    ${innerPseudoElem};
-    bottom: -10px;
-    right: 0;
-    rotate: 180deg;
-  }
-`
-
 export const ButtonContainer = styled.button<IButtonContainerProps>`
   cursor: pointer;
-  min-width: 101px;
-  width: ${({ $width }) => ($width ? `${$width}px` : 'auto')};
+  min-width: 100px;
   font-size: 14px;
   text-align: center;
   text-transform: uppercase;
   color: ${Color.White};
   transition: transform 0.3s;
+  width: ${({ $width }) => ($width ? `${$width}px` : '100px')};
+  height: 40px;
+  position: relative;
+  clip-path: polygon(
+    10px 0,
+    100% 0,
+    100% calc(100% - 10px),
+    calc(100% - 10px) 100%,
+    0 100%,
+    0 10px
+  );
+  background-color: ${({ $color }) =>
+    $color === ButtonStyle.Red ? Color.CrimsonRed : Color.DarkGray};
 
   &:hover {
     transform: translateY(-5px);
-  }
-
-  &::before {
-    ${buttonContainerPseudoElem};
-    margin-left: 9px;
-  }
-
-  &::after {
-    ${buttonContainerPseudoElem};
-    margin-right: 9px;
   }
 `

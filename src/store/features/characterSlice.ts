@@ -16,7 +16,10 @@ interface IState extends ICharacterExtended {
 const initialState: IState = {
   id: null,
   name: '',
-  thumbnail: null,
+  thumbnail: {
+    path: '',
+    extension: '',
+  },
   description: '',
   urls: [],
   comics: {

@@ -42,9 +42,9 @@ export const charactersSlice = createSlice({
     builder.addCase(
       loadCharacters.fulfilled,
       (state: IState, action: PayloadAction<ICharacters>) => {
-        state.offset = action.payload.results.length
+        state.offset += action.payload.results.length
         state.total = action.payload.total
-        state.results = action.payload.results
+        state.results = [...state.results, ...action.payload.results]
         state.loading = false
       },
     )

@@ -3,6 +3,10 @@ import styled, { css } from 'styled-components'
 
 import { Color } from '~/constants'
 
+interface IThumbnailProps {
+  $thumbnail: boolean
+}
+
 const block = css`
   border-radius: 7px;
   box-shadow: 5px 5px 20px ${hexToRgba(Color.Black, 0.25)};
@@ -38,7 +42,9 @@ export const ErrorImage = styled.img`
   height: 250px;
 `
 
-export const StyledLink = styled.a``
+export const StyledLink = styled.a`
+  text-decoration: none;
+`
 
 export const BlockButtons = styled.div`
   display: flex;
@@ -63,10 +69,11 @@ export const BlockInfo = styled.div`
   row-gap: 10px;
 `
 
-export const BlockThumbnail = styled.img`
+export const BlockThumbnail = styled.img<IThumbnailProps>`
   width: 180px;
   height: 180px;
-  object-fit: cover;
+  border-radius: 7px;
+  object-fit: ${({ $thumbnail }) => ($thumbnail ? 'cover' : 'unset')};
 `
 
 export const Block = styled.div`

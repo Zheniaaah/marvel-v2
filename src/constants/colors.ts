@@ -1,8 +1,9 @@
 export enum Color {
-  White = '#FFFFFF',
+  White = '#ffffff',
   Black = '#000000',
-  AntiFlashWhite = '#ECF1F7',
+  AntiFlashWhite = '#Ecf1f7',
   CrimsonRed = '#9f0013',
   DarkCharcoal = '#232222',
   DarkGray = '#5c5c5c',
+  LightGray = '#c4c4c4',
 }

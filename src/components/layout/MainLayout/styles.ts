@@ -13,6 +13,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100lvh;
+  min-height: 100lvh;
+  height: 100%;
   background-color: ${Color.AntiFlashWhite};
 `

@@ -1,10 +1,11 @@
 import hexToRgba from 'hex-to-rgba'
 import styled, { css, keyframes } from 'styled-components'
 
-import { Color } from '~/constants'
+import { Color, LoaderStyle } from '~/constants'
 
 export interface ILoaderProps {
   size: number
+  $color: LoaderStyle
 }
 
 const SpinnerAnimation = keyframes`
@@ -24,18 +25,23 @@ export const LoaderContainer = styled.div<ILoaderProps>`
   justify-content: center;
   width: ${({ size }) => size}px;
   height: ${({ size }) => size}px;
+  margin: 0 auto;
 
   ${LoaderItem} {
-    ${({ size }) =>
+    ${({ size, $color }) =>
       size &&
       css`
         width: ${size}px;
         height: ${size}px;
         border-radius: 50%;
-        border-top: ${size * 0.15}px solid ${Color.CrimsonRed};
-        border-right: ${size * 0.15}px solid ${hexToRgba(Color.CrimsonRed, 0.4)};
-        border-bottom: ${size * 0.15}px solid ${hexToRgba(Color.CrimsonRed, 0.4)};
-        border-left: ${size * 0.15}px solid ${hexToRgba(Color.CrimsonRed, 0.4)};
+        border-top: ${size * 0.15}px solid
+          ${$color === LoaderStyle.Red ? Color.CrimsonRed : Color.White};
+        border-right: ${size * 0.15}px solid
+          ${hexToRgba($color === LoaderStyle.Red ? Color.CrimsonRed : Color.White, 0.4)};
+        border-bottom: ${size * 0.15}px solid
+          ${hexToRgba($color === LoaderStyle.Red ? Color.CrimsonRed : Color.White, 0.4)};
+        border-left: ${size * 0.15}px solid
+          ${hexToRgba($color === LoaderStyle.Red ? Color.CrimsonRed : Color.White, 0.4)};
         animation: ${SpinnerAnimation} 1.2s linear infinite;
       `}
   }

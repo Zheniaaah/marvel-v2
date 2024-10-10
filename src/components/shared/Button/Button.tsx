@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ButtonContainer, Inner } from './styles'
+import { ButtonContainer } from './styles'
 
 import { ButtonStyle } from '~/constants'
 
@@ -13,7 +13,7 @@ interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 const Button: React.FC<IProps> = ({ children, view, width, ...props }) => {
   return (
     <ButtonContainer $color={view} $width={width} {...props}>
-      <Inner $color={view}>{children}</Inner>
+      {children}
     </ButtonContainer>
   )
 }
