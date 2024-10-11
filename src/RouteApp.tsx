@@ -5,6 +5,7 @@ import { ComicsLayout, MainLayout } from '~/components/layout'
 import { Route as RoutePath } from '~/constants'
 
 const Characters = lazy(() => import('~/components/page/Characters/Page'))
+const Comics = lazy(() => import('~/components/page/Comics/Page'))
 const Character = lazy(() => import('~/components/page/Character/Page'))
 const Comic = lazy(() => import('~/components/page/Comic/Page'))
 
@@ -17,6 +18,7 @@ const RouteApp: React.FC = () => {
         <Route element={<MainLayout />}>
           <Route path={RoutePath.Connect} element={<Characters />} />
           <Route element={<ComicsLayout />}>
+            <Route path={RoutePath.Comics} element={<Comics />} />
             <Route path={RoutePath.Character} element={<Character />} />
             <Route path={RoutePath.Comic} element={<Comic />} />
           </Route>

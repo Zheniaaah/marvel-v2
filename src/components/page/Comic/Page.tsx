@@ -38,7 +38,7 @@ const Page: React.FC = () => {
             <InfoDescription>
               {description ? description : 'There is no description'}
             </InfoDescription>
-            <InfoPrice>{prices[0]?.price ? prices[0].price : 'not available'}</InfoPrice>
+            <InfoPrice>{prices[0]?.price ? `${prices[0].price}$` : 'not available'}</InfoPrice>
           </Info>
         </Container>
       )}

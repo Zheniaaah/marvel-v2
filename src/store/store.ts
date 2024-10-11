@@ -7,12 +7,15 @@ import {
   characterSlice,
   charactersSlice,
   comicActions,
+  comicsActions,
   comicSlice,
+  comicsSlice,
   foundCharacterActions,
   foundCharacterSlice,
   loadCharacter,
   loadCharacters,
   loadComic,
+  loadComics,
   loadRandomCharacter,
   randomCharacterActions,
   randomCharacterSlice,
@@ -28,6 +31,7 @@ export const store = configureStore({
     character: characterSlice,
     foundCharacter: foundCharacterSlice,
     comic: comicSlice,
+    comics: comicsSlice,
   },
 })
 
@@ -40,4 +44,5 @@ export const actions = {
   character: { ...characterActions, loadCharacter },
   foundCharacter: { ...foundCharacterActions, searchCharacter },
   comic: { ...comicActions, loadComic },
+  comics: { ...comicsActions, loadComics },
 }

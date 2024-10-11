@@ -27,8 +27,8 @@ const CharList: React.FC = () => {
   }, [dispatch])
 
   useEffect(() => {
-    updateChars()
-  }, [updateChars])
+    if (!results.length) updateChars()
+  }, [results, updateChars])
 
   return (
     <Container>
@@ -51,13 +51,17 @@ const CharList: React.FC = () => {
             ))}
         </List>
         {loading && offset === 0 && <Loader size={100} />}
-        {offset !== 0 && (
+        {(error || offset !== 0) && (
           <StyledButton view={ButtonStyle.Red} onClick={updateChars} disabled={loading} width={170}>
-            {loading ? <Loader size={18} color={LoaderStyle.White} /> : 'load more'}
-            {error && 'try again'}
+            {loading ? (
+              <Loader size={18} color={LoaderStyle.White} />
+            ) : error ? (
+              'try again'
+            ) : (
+              'load more'
+            )}
           </StyledButton>
         )}
-        {error && <div>Failed to load characters. Please try again.</div>}
       </ListContainer>
       <CharContainer>
         <CharInfo charId={selectedChar} />
