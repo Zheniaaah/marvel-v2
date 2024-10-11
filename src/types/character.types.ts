@@ -1,4 +1,5 @@
 import { IComic } from './comic.types'
+import { IThumbnail } from './thumbnail.types'
 
 export interface ICharacterExtended extends IRandomCharacter {
   comics: {
@@ -18,9 +19,4 @@ export interface ICharacter {
   id: number | null
   name: string
   thumbnail: IThumbnail
-}
-
-export interface IThumbnail {
-  path: string
-  extension: string
 }

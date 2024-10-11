@@ -40,13 +40,11 @@ export const randomCharacterSlice = createSlice({
     })
     builder.addCase(
       loadRandomCharacter.fulfilled,
-      (state: IState, action: PayloadAction<IRandomCharacter[]>) => {
-        action.payload.forEach(({ id, name, thumbnail, urls }) => {
-          state.id = id
-          state.name = name
-          state.thumbnail = thumbnail
-          state.urls = urls
-        })
+      (state: IState, action: PayloadAction<IRandomCharacter>) => {
+        state.id = action.payload.id
+        state.name = action.payload.name
+        state.thumbnail = action.payload.thumbnail
+        state.urls = action.payload.urls
         state.loading = false
       },
     )
@@ -57,7 +55,7 @@ export const randomCharacterSlice = createSlice({
   },
 })
 
-export const loadRandomCharacter = createAsyncThunk<IRandomCharacter[], void, { state: RootState }>(
+export const loadRandomCharacter = createAsyncThunk<IRandomCharacter, void, { state: RootState }>(
   'random-character/load',
   async () => {
     const randomId = Math.floor(Math.random() * (1011400 - 1011000) + 1011000)
@@ -66,7 +64,7 @@ export const loadRandomCharacter = createAsyncThunk<IRandomCharacter[], void, { 
       data: { results },
     } = await api.get<{ results: IRandomCharacter[] }>(`characters/${randomId}`)
 
-    return results
+    return results[0]
   },
 )
 

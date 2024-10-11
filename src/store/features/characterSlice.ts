@@ -30,7 +30,7 @@ const initialState: IState = {
 }
 
 export const characterSlice = createSlice({
-  name: 'random-character',
+  name: 'character',
   initialState,
   reducers: {
     reset: (): IState => initialState,

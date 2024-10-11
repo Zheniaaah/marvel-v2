@@ -72,11 +72,13 @@ const CharInfo: React.FC<IProps> = ({ charId }) => {
           {!loading && !error && (
             <>
               <CharBasics>
-                <CharThumbnail
-                  src={concatThumbnailUrl(thumbnail)}
-                  alt={name}
-                  $thumbnail={!concatThumbnailUrl(thumbnail).includes('image_not_available')}
-                />
+                <Link to={replaceParams(Route.Character, { id: charId })}>
+                  <CharThumbnail
+                    src={concatThumbnailUrl(thumbnail)}
+                    alt={name}
+                    $thumbnail={!concatThumbnailUrl(thumbnail).includes('image_not_available')}
+                  />
+                </Link>
                 <CharNameContainer>
                   <CharName>{name}</CharName>
                   <CharButtons>

@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 
 import {
+  CharContainer,
   CharItem,
   CharName,
   CharThumbnail,
@@ -11,7 +12,7 @@ import {
 } from './styles'
 
 import { Loader } from '~/components/shared'
-import { CharInfo } from '~/components/widget'
+import { CharInfo, CharSearch } from '~/components/widget'
 import { ButtonStyle, LoaderStyle } from '~/constants'
 import { concatThumbnailUrl } from '~/functions'
 import { actions, useAppDispatch, useAppSelector } from '~/store'
@@ -58,7 +59,10 @@ const CharList: React.FC = () => {
         )}
         {error && <div>Failed to load characters. Please try again.</div>}
       </ListContainer>
-      <CharInfo charId={selectedChar} />
+      <CharContainer>
+        <CharInfo charId={selectedChar} />
+        <CharSearch />
+      </CharContainer>
     </Container>
   )
 }

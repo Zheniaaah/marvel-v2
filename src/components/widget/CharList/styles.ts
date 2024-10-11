@@ -12,6 +12,12 @@ interface IItemProps {
   $selected: boolean
 }
 
+export const CharContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+`
+
 export const StyledButton = styled(Button)`
   margin-top: 45px;
 `

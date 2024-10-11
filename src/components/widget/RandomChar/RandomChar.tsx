@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 import {
   Block,
@@ -19,12 +20,12 @@ import {
 import errorImg from '@/images/error.gif'
 import mjolnirImg from '@/images/mjolnir.png'
 import { Button, Loader } from '~/components/shared'
-import { ButtonStyle } from '~/constants'
-import { concatThumbnailUrl } from '~/functions'
+import { ButtonStyle, Route } from '~/constants'
+import { concatThumbnailUrl, replaceParams } from '~/functions'
 import { actions, useAppDispatch, useAppSelector } from '~/store'
 
 const RandomChar: React.FC = () => {
-  const { name, thumbnail, description, urls, loading, error } = useAppSelector(
+  const { id, name, thumbnail, description, urls, loading, error } = useAppSelector(
     (state) => state.randomCharacter,
   )
   const dispatch = useAppDispatch()
@@ -44,15 +45,17 @@ const RandomChar: React.FC = () => {
         {error && <ErrorImage src={errorImg} alt="error" />}
         {!loading && !error && (
           <Block>
-            <BlockThumbnail
-              src={concatThumbnailUrl(thumbnail)}
-              alt={name}
-              $thumbnail={!concatThumbnailUrl(thumbnail).includes('image_not_available')}
-            />
+            <Link to={replaceParams(Route.Character, { id: id! })}>
+              <BlockThumbnail
+                src={concatThumbnailUrl(thumbnail)}
+                alt={name}
+                $thumbnail={!concatThumbnailUrl(thumbnail).includes('image_not_available')}
+              />
+            </Link>
             <BlockInfo>
               <BlockName>{name}</BlockName>
               <BlockDescription>
-                {description === '' ? 'There is no description for this character' : description}
+                {description ? description : 'There is no description for this character'}
               </BlockDescription>
               <BlockButtons>
                 {urls.map(({ type, url }, i) => {
