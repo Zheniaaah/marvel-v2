@@ -26,7 +26,7 @@ const Page: React.FC = () => {
 
   useEffect(() => {
     dispatch(actions.comic.loadComic(Number(id!)))
-  }, [dispatch, id])
+  }, [id])
 
   return (
     <>

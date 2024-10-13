@@ -16,6 +16,8 @@ interface ICharacters {
 }
 
 interface IState extends ICharacters {
+  selectedChar: number | null
+  scrollPosition: number
   loading: boolean
   error: boolean
 }
@@ -24,6 +26,8 @@ const initialState: IState = {
   offset: 0,
   total: 0,
   results: [],
+  selectedChar: null,
+  scrollPosition: 0,
   loading: false,
   error: false,
 }
@@ -33,6 +37,12 @@ export const charactersSlice = createSlice({
   initialState,
   reducers: {
     reset: (): IState => initialState,
+    updateSelectedChar: (state: IState, action: PayloadAction<number | null>): void => {
+      state.selectedChar = action.payload
+    },
+    updateScrollPosition: (state: IState, action: PayloadAction<number>): void => {
+      state.scrollPosition = action.payload
+    },
   },
   extraReducers: (builder: ActionReducerMapBuilder<IState>) => {
     builder.addCase(loadCharacters.pending, (state: IState) => {

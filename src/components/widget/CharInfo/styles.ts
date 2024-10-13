@@ -102,6 +102,7 @@ export const SkeletonLine = styled.div<ISkeletonLineProps>`
 export const SkeletonCircle = styled.div`
   height: 40px;
   width: 40px;
+  aspect-ratio: 1;
   border-radius: 100%;
   background-color: ${Color.LightGray};
   animation: ${pulse} 1.5s ease-in-out 0.5s infinite;

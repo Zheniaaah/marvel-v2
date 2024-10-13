@@ -13,6 +13,9 @@ interface IItemProps {
 }
 
 export const CharContainer = styled.div`
+  position: sticky;
+  top: 20px;
+  height: min-content;
   display: flex;
   flex-direction: column;
   gap: 30px;

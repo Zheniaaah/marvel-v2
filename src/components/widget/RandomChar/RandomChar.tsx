@@ -30,13 +30,13 @@ const RandomChar: React.FC = () => {
   )
   const dispatch = useAppDispatch()
 
+  useEffect(() => {
+    if (!id) updateChar()
+  }, [])
+
   const updateChar = useCallback(() => {
     dispatch(actions.randomCharacter.loadRandomCharacter())
-  }, [dispatch])
-
-  useEffect(() => {
-    updateChar()
-  }, [updateChar])
+  }, [])
 
   return (
     <Container>

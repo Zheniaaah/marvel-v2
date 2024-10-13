@@ -16,6 +16,7 @@ interface IComics {
 }
 
 interface IState extends IComics {
+  scrollPosition: number
   loading: boolean
   error: boolean
 }
@@ -24,6 +25,7 @@ const initialState: IState = {
   offset: 0,
   total: 0,
   results: [],
+  scrollPosition: 0,
   loading: false,
   error: false,
 }
@@ -33,6 +35,9 @@ export const comicsSlice = createSlice({
   initialState,
   reducers: {
     reset: (): IState => initialState,
+    updateScrollPosition: (state: IState, action: PayloadAction<number>): void => {
+      state.scrollPosition = action.payload
+    },
   },
   extraReducers: (builder: ActionReducerMapBuilder<IState>) => {
     builder.addCase(loadComics.pending, (state: IState) => {

@@ -25,14 +25,14 @@ const CharSearch: React.FC = () => {
 
   useEffect(() => {
     dispatch(actions.foundCharacter.reset())
-  }, [dispatch])
+  }, [])
 
   const handleSearch = useCallback(
     (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault()
       dispatch(actions.foundCharacter.searchCharacter(inputValue))
     },
-    [dispatch, inputValue],
+    [inputValue],
   )
 
   return (

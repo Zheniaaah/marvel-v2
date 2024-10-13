@@ -15,52 +15,57 @@ import {
 import { Loader } from '~/components/shared'
 import { ButtonStyle, LoaderStyle, Route } from '~/constants'
 import { concatThumbnailUrl, replaceParams } from '~/functions'
+import { usePreloadData } from '~/hooks'
 import { actions, useAppDispatch, useAppSelector } from '~/store'
 
 const ComicsList: React.FC = () => {
-  const { offset, results, loading, error } = useAppSelector((state) => state.comics)
+  const { offset, results, scrollPosition, loading, error } = useAppSelector(
+    (state) => state.comics,
+  )
   const dispatch = useAppDispatch()
 
-  const updateComics = useCallback(() => {
-    dispatch(actions.comics.loadComics())
-  }, [dispatch])
+  const [isPending, preloadedData] = usePreloadData({
+    data: results,
+    builder: ({ id, title, prices, thumbnail }, i) => (
+      <ComicItem key={i}>
+        <Link to={replaceParams(Route.Comic, { id: id! })}>
+          <Thumbnail
+            src={concatThumbnailUrl(thumbnail)}
+            alt="title"
+            $thumbnail={!concatThumbnailUrl(thumbnail).includes('image_not_available')}
+          />
+          <ComicInfo>
+            <ComicTitle>{title}</ComicTitle>
+            <ComicPrice>{prices[0].price ? `${prices[0].price}$` : 'not available'}</ComicPrice>
+          </ComicInfo>
+        </Link>
+      </ComicItem>
+    ),
+    scrollPosition: scrollPosition,
+    setScrollPosition: actions.comics.updateScrollPosition,
+  })
 
   useEffect(() => {
     if (!results.length) updateComics()
-  }, [results, updateComics])
+  }, [results])
+
+  const updateComics = useCallback(() => {
+    dispatch(actions.comics.loadComics())
+  }, [])
 
   return (
     <>
       <Container>
-        <ListContainer>
-          {!error &&
-            results.map(({ id, title, prices, thumbnail }) => (
-              <ComicItem key={id}>
-                <Link to={replaceParams(Route.Comic, { id: id! })}>
-                  <Thumbnail
-                    src={concatThumbnailUrl(thumbnail)}
-                    alt="title"
-                    $thumbnail={!concatThumbnailUrl(thumbnail).includes('image_not_available')}
-                  />
-                  <ComicInfo>
-                    <ComicTitle>{title}</ComicTitle>
-                    <ComicPrice>
-                      {prices[0].price ? `${prices[0].price}$` : 'not available'}
-                    </ComicPrice>
-                  </ComicInfo>
-                </Link>
-              </ComicItem>
-            ))}
-        </ListContainer>
-        {loading && offset === 0 && <Loader size={100} />}
+        <ListContainer>{!error && preloadedData}</ListContainer>
+        {(loading || isPending) && offset === 0 && <Loader size={100} />}
         {(error || offset !== 0) && (
           <StyledButton
             view={ButtonStyle.Red}
             onClick={updateComics}
-            disabled={loading}
+            disabled={loading || isPending}
             width={170}
           >
-            {loading ? (
+            {loading || isPending ? (
               <Loader size={18} color={LoaderStyle.White} />
             ) : error ? (
               'try again'

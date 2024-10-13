@@ -47,7 +47,7 @@ const CharInfo: React.FC<IProps> = ({ charId }) => {
     if (charId) {
       dispatch(actions.character.loadCharacter(charId))
     }
-  }, [dispatch, charId])
+  }, [charId])
 
   return (
     <Container>

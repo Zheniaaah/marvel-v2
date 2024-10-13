@@ -25,7 +25,7 @@ const Page: React.FC = () => {
 
   useEffect(() => {
     dispatch(actions.character.loadCharacter(Number(id!)))
-  }, [dispatch, id])
+  }, [id])
 
   return (
     <>
